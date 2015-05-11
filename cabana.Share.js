@@ -110,6 +110,10 @@ Cabana.Share = function() {
 		}
 	};
 
+
+
+
+
 	var returnState = false;
 	try {
 		this[this.type.toLowerCase()](this.url);
