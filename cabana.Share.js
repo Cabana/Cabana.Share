@@ -34,13 +34,22 @@ Cabana.Share = function() {
 
 
 	this.openWindow = function(url) {
-		var shareWindow = window.open(url, 'Share');
-
-		if (shareWindow.focus) {
-			shareWindow.focus()
+		var anchor = document.createElement("a");
+		anchor.href = url;
+		anchor.target = "_blank";
+		console.log(anchor);
+		if (anchor.onclick) {
+			anchor.onclick();
+		} else {
+			anchor.click();
 		}
+		// var shareWindow = window.open(url, 'Share');
 
-		return shareWindow;
+		// if (shareWindow.focus) {
+		// 	shareWindow.focus()
+		// }
+
+		// return shareWindow;
 	};
 
 
@@ -87,8 +96,6 @@ Cabana.Share = function() {
     } else {
     	shareUrl += "body="+window.location.href;
     }
-
-    alert(shareUrl);
 
     window.location = shareUrl;
 
