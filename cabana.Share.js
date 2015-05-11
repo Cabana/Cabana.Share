@@ -97,8 +97,9 @@ Cabana.Share = function() {
     	shareUrl += "body="+window.location.href;
     }
 
-    window.location = shareUrl;
+    // window.location = shareUrl;
 
+    	this.openWindow(shareUrl);
 	};
 
 	this.print = function() {
