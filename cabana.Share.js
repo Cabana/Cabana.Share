@@ -33,11 +33,12 @@ Cabana.Share = function() {
 	};
 
 
-	this.openWindow = function(url) {
+	this.openWindow = function(url, newWindow) {
 		var anchor = document.createElement("a");
 		anchor.href = url;
-		anchor.target = "_blank";
+		anchor.target = newWindow !== false ? "_blank" : "_self";
 		console.log(anchor);
+
 		if (anchor.onclick) {
 			anchor.onclick();
 		} else {
@@ -99,7 +100,7 @@ Cabana.Share = function() {
 
     // window.location = shareUrl;
 
-    	this.openWindow(shareUrl);
+    	this.openWindow(shareUrl, false);
 	};
 
 	this.print = function() {
