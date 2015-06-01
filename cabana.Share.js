@@ -127,6 +127,15 @@ Cabana.Share = function() {
 };
 
 if (addthis) {
+	addthis = {
+		update: function() {
+			return;
+		}
+	};
+	addthis_sendto = function(type) {
+		return Cabana.Share(type);
+	};
+} else {
 	var addthis = {
 		update: function() {
 			return;
