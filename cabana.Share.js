@@ -80,7 +80,7 @@ Cabana.Share = function() {
 		this.openWindow(shareUrl);
 	};
 
-	this.email = function(url) {
+	this.mail = this.email = function(url) {
 		var options = Cabana.vars.Share.email;
 
     var shareUrl = "mailto:";
@@ -142,7 +142,7 @@ if (addthis) {
 			return;
 		}
 	};
-	addthis_sendto = function(type) {
+	var addthis_sendto = function(type) {
 		return Cabana.Share(type);
 	};
 }
