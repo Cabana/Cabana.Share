@@ -32,6 +32,45 @@ Cabana.Share = function() {
 		"twitter": "https://twitter.com/intent/tweet"
 	};
 
+	this.isTouch = function() {
+ 		return (('ontouchstart' in window)
+ 			|| (navigator.MaxTouchPoints > 0)
+      || (navigator.msMaxTouchPoints > 0));
+	};
+
+	this.shareTo = function(url, newWindow) {
+    var startTime, endTime, elapsedTime, intentUrl;
+		
+		if (!this.isTouch()){
+	    
+	  	if (url.indexOf(this.shareUrls.facebook) > -1) {
+	  		intentUrl = "fb://post/"+url;
+	  	} else if (url.indexOf(this.shareUrls.twitter) > -1) {
+	  		intentUrl = "twitter://post?message="+url;
+	  	}
+
+	  	newWindow = false;
+
+	    console.log(intentUrl);
+
+	    startTime = new Date().getTime();
+
+	  	document.location = intentUrl;
+
+	    endTime = new Date().getTime();
+
+	    elapsedTime = (endTime - startTime);
+
+	    console.log(elapsedTime);
+
+	    if (elapsedTime < 1) {
+	        this.openWindow(url, newWindow);
+	    }
+	  } else {
+	  	this.openWindow(url, newWindow);
+	  }
+	};
+
 
 	this.openWindow = function(url, newWindow) {
 		var anchor = document.createElement("a");
@@ -58,7 +97,7 @@ Cabana.Share = function() {
 		var shareUrl = this.shareUrls['facebook'];
 		shareUrl += "?u="+url;
 
-		this.openWindow(shareUrl);
+		this.shareTo(shareUrl);
 	};
 
 	this.twitter = function(url) {
@@ -77,7 +116,7 @@ Cabana.Share = function() {
 			shareUrl += "&hashtags="+encodeURIComponent(options.hashtags);
 		}
 
-		this.openWindow(shareUrl);
+		this.shareTo(shareUrl);
 	};
 
 	this.mail = this.email = function(url) {
@@ -100,7 +139,7 @@ Cabana.Share = function() {
 
     // window.location = shareUrl;
 
-    	this.openWindow(shareUrl, false);
+    	this.shareTo(shareUrl, false);
 	};
 
 	this.print = function() {
