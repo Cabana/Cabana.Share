@@ -7,7 +7,6 @@ This sharing module is privacy-embracing, cookie-avoiding and ultra-light.
 Either you grap one of the build files from /build
 ... or you use `bower install cabana-share`
 
-## Initiating
 To make sure you always have the latest version use:
 ```<script src="https://rawgit.com/Cabana/cabana.Share/master/build/cabana.Share.min.js" type="text/javascript"></script>```
 
