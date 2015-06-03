@@ -17,7 +17,7 @@ To make sure you always have the latest version use:
 * Share current page to external media
 * @param Url - Url to share - will default to window.location.href
 * @param Type - Media to share through
-* @return
+* @return boolean
 */
 Cabana.Share(Url, Type)
 ```
@@ -48,7 +48,7 @@ window.CabanaShareSettings = {
 		text: null,
 		/* Type standard body for email. Every [URL] will be replaced by window.location.href. Defaults to window.location.href */
 		subject: null,
-		/* Mail-subject. Defaults to window.location.title */
+		/* Mail-subject. Defaults to document.title */
 	}
 }
 ```

@@ -196,6 +196,9 @@ if (addthis) {
 	addthis = {
 		update: function() {
 			return;
+		},
+		init: function() {
+			return;
 		}
 	};
 	addthis_sendto = function(type) {
@@ -204,6 +207,9 @@ if (addthis) {
 } else {
 	var addthis = {
 		update: function() {
+			return;
+		},
+		init: function() {
 			return;
 		}
 	};
