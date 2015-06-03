@@ -1,0 +1,21 @@
+{
+  "name": "cabana-share",
+  "version": "0.1.3",
+  "authors": [
+    "Leo Ørsnes <loe@cabana.dk>"
+  ],
+  "description": "Detect whether your user is left- or right-handed and let your design react to the result.",
+  "main": "build/cabana.Share.min.js",
+  "keywords": [
+    "javascript",
+    "js",
+    "share",
+    "privacy",
+    "sharing",
+    "socialmedia",
+    "leo",
+    "orsnes"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/cabana/cabana.Share.js"
+}
