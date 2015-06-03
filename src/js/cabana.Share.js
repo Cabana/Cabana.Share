@@ -64,10 +64,7 @@ Cabana.Share = function() {
 		
 		if (this.isTouch()){
 	    
-	  	if (url.indexOf(this.shareUrls.facebook) > -1) {
-	  		intentUrl = "fb://publish/?text="+url;
-	  		tryIntent = true;
-	  	} else if (url.indexOf(this.shareUrls.twitter) > -1) {
+	  	if (url.indexOf(this.shareUrls.twitter) > -1) {
 	  		intentUrl = "twitter://post?message="+url;
 	  		tryIntent = true;
 	  	}
