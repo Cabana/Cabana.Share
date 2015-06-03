@@ -56,32 +56,43 @@ Cabana.Share = function() {
 	};
 
 	this.shareTo = function(url, newWindow) {
-    var startTime, endTime, elapsedTime, intentUrl;
+    var startTime,
+    		endTime,
+  			elapsedTime,
+  			intentUrl,
+  			tryIntent = false;
 		
 		if (this.isTouch()){
 	    
 	  	if (url.indexOf(this.shareUrls.facebook) > -1) {
-	  		intentUrl = "fb://post/"+url;
+	  		intentUrl = "fb://publish/?text="+url;
+	  		tryIntent = true;
 	  	} else if (url.indexOf(this.shareUrls.twitter) > -1) {
 	  		intentUrl = "twitter://post?message="+url;
+	  		tryIntent = true;
 	  	}
 
-	  	newWindow = false;
+	  	if (tryIntent) {
 
-	    console.log(intentUrl);
+		  	newWindow = false;
 
-	    startTime = new Date().getTime();
+		    console.log(intentUrl);
 
-	  	document.location = intentUrl;
+		    startTime = new Date().getTime();
 
-	    endTime = new Date().getTime();
+		  	document.location = intentUrl;
 
-	    elapsedTime = (endTime - startTime);
+		    endTime = new Date().getTime();
 
-	    console.log(elapsedTime);
+		    elapsedTime = (endTime - startTime);
 
-	    if (elapsedTime < 1) {
-	    		newWindow = true;
+		    console.log(elapsedTime);
+		  }
+
+	    if (elapsedTime === undefined || elapsedTime < 1) {
+
+	    		tryIntent == true ? newWindow = true : void(0);
+
 	        this.openWindow(url, newWindow);
 	    }
 	  } else {
