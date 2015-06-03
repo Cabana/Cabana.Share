@@ -41,7 +41,7 @@ Cabana.Share = function() {
 	this.shareTo = function(url, newWindow) {
     var startTime, endTime, elapsedTime, intentUrl;
 		
-		if (!this.isTouch()){
+		if (this.isTouch()){
 	    
 	  	if (url.indexOf(this.shareUrls.facebook) > -1) {
 	  		intentUrl = "fb://post/"+url;
@@ -64,6 +64,7 @@ Cabana.Share = function() {
 	    console.log(elapsedTime);
 
 	    if (elapsedTime < 1) {
+	    		newWindow = true;
 	        this.openWindow(url, newWindow);
 	    }
 	  } else {
