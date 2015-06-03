@@ -8,7 +8,7 @@ Either you grap one of the build files from /build
 
 ## Initiating
 To make sure you always have the latest version use:
-`<script src="https://rawgit.com/Cabana/cabana.Share/master/build/cabana.Share.min.js" type="text/javascript"></script>`
+```<script src="https://rawgit.com/Cabana/cabana.Share/master/build/cabana.Share.min.js" type="text/javascript"></script>```
 
 ## Usage
 ```javascript
