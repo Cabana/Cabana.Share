@@ -33,7 +33,26 @@ Types are:
 
 ## Configuration
 Configuration is not yet possible, but will be in the future.
+Configuration can be made, by defining window.CabanaShareSettings
 
+```javascript
+window.CabanaShareSettings = {
+	'twitter': {
+		user: null,
+		/* Twitter-handle for user associated with site, will be added to tweet. Defaults to null */
+		text: null,
+		/* Standard text for tweet before url. Defaults to window.location.href */
+		hashtags: null,
+		/* Comma-seperated list of hashtags to add to tweet. Defaults to null */
+	},
+	'email': {
+		text: null,
+		/* Type standard body for email. Every [URL] will be replaced by window.location.href. Defaults to window.location.href */
+		subject: null,
+		/* Mail-subject. Defaults to window.location.title */
+	}
+}
+```
 
 ## Overrides
 This module will override AddThis if included.

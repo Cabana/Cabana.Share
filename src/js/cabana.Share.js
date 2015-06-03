@@ -15,11 +15,28 @@ Cabana.vars.Share = {
 		hashtags: null
 	},
 	"email": {
-		text: null,
-		subject: null /*REPLACES [URL] WITH ABSOLUTE URL*/
+		text: null, /*REPLACES [URL] WITH ABSOLUTE URL*/
+		subject: null
 	},
 	"errors": []
 };
+
+
+if (window.CabanaShareSettings) {
+	try {
+		for (var key in window.CabanaShareSettings) {
+			for (var object in window.CabanaShareSettings[key]) {
+
+				Cabana.vars.Share[key][object] = window.CabanaShareSettings[key][object];
+
+			}
+		}
+	} catch(e) {
+		console.log("Something went wrong setting up configuration");
+	}
+}
+
+
 
 Cabana.Share = function() {
 
@@ -126,7 +143,7 @@ Cabana.Share = function() {
     var shareUrl = "mailto:";
 
     if (options.subject) {
-    	shareUrl += "?subject="+encodeURIComponent(options.subject);
+    	shareUrl += "?subject="+encodeURIComponent(options.subject ? options.subject : document.title);
     	shareUrl += "&";
     } else {
   		shareUrl += "?";
