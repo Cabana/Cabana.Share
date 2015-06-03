@@ -1,6 +1,7 @@
 # Cabana.Share
 
 Cabana A/S Sharing-module.
+This sharing module is privacy-embracing, cookie-avoiding and ultra-light.
 
 ## Installing
 Either you grap one of the build files from /build
