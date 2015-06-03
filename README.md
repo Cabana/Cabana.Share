@@ -37,6 +37,7 @@ Configuration is not yet possible, but will be in the future.
 
 ## Overrides
 This module will override AddThis if included.
+It'll override (or create) both `addthis.update()` and `addthis_sendto()`.
 
 ## Status
 This module is still in **alpha** release
