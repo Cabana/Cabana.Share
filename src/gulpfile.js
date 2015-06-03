@@ -1,5 +1,4 @@
 var gulp = require("gulp"),
-    // jshint = require("gulp-jshint"),
     uglify = require("gulp-uglify"),
     concat = require("gulp-concat"),
     clean = require('gulp-clean'),
@@ -24,10 +23,6 @@ gulp.task("build", ["clean"], function () {
         .pipe(include())
         .pipe(gulp.dest(buildDir)));
     return _merge;
-   //return gulp.src(srcDir)
-      // .pipe(include())
-      // .pipe(uglify())
-      // .pipe(gulp.dest(buildDir));
 });
 gulp.task("build:min", function() {
   var _merge = new merge();
