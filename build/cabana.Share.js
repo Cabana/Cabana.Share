@@ -215,31 +215,27 @@ Cabana.Share = function() {
 	}
 };
 
-if (addthis) {
-	addthis = {
-		update: function() {
-			return;
-		},
-		init: function() {
-			return;
-		}
-	};
-	addthis_sendto = function(type) {
-		return Cabana.Share(type);
-	};
-} else {
-	var addthis = {
-		update: function() {
-			return;
-		},
-		init: function() {
-			return;
-		}
-	};
+if (!addthis) {
+	var addthis = {};
+}
+if (!addthis_sendto) {
 	var addthis_sendto = function(type) {
 		return Cabana.Share(type);
 	};
 }
+
+
+addthis = {
+	update: function() {
+		return;
+	},
+	init: function() {
+		return;
+	},
+	addEventListener: function() {
+		return;
+	}
+};
 
 
 
