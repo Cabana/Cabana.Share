@@ -237,13 +237,13 @@ if (!addthis) {
 			for (var nextKey in addthis[key]) {
 				var nextType = typeof addthis[key][keyNext];
 				if (nextType == "function") {
-					output[key][keyNext] = function() {
+					output[key][nextKey] = function() {
 						return;
 					};
 				} else if (nextType == object) {
-					output[key][keyNext] = {};
+					output[key][nextKey] = {};
 				} else {
-					output[key][keyNext] = null;
+					output[key][nextKey] = null;
 				}
 			}
 		}
