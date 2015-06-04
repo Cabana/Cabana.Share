@@ -232,10 +232,7 @@ addthis = {
 	init: function() {
 		return;
 	},
-	addEventListener: function() {
-		return;
-	},
-	ready: function() {
+	__noSuchMethod__: function() {
 		return;
 	}
 };
