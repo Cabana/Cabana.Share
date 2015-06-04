@@ -49,6 +49,17 @@ Cabana.Share = function() {
 		"twitter": "https://twitter.com/intent/tweet"
 	};
 
+
+	/*
+	Linkedin
+	https://www.linkedin.com/shareArticle?
+	mini=true
+	&url=http://developer.linkedin.com
+	&title=LinkedIn%20Developer%20Network
+	&summary=My%20favorite%20developer%20program
+	&source=LinkedIn
+	*/
+
 	this.isTouch = function() {
  		return (('ontouchstart' in window)
  			|| (navigator.MaxTouchPoints > 0)
@@ -61,6 +72,7 @@ Cabana.Share = function() {
   			elapsedTime,
   			intentUrl,
   			tryIntent = false;
+
 		
 		if (this.isTouch()){
 	    
@@ -102,6 +114,13 @@ Cabana.Share = function() {
 		var anchor = document.createElement("a");
 		anchor.href = url;
 		anchor.target = newWindow !== false ? "_blank" : "_self";
+		anchor.style.position = "absolute";
+		anchor.style.display = "inline-block";
+		anchor.style.opacity = "0";
+		anchor.id = "CabanaShareA";
+
+		document.body.appendChild(anchor);
+
 		console.log(anchor);
 
 		if (anchor.onclick) {
@@ -109,6 +128,10 @@ Cabana.Share = function() {
 		} else {
 			anchor.click();
 		}
+
+
+		anchor.remove();
+
 		// var shareWindow = window.open(url, 'Share');
 
 		// if (shareWindow.focus) {
@@ -217,3 +240,25 @@ if (addthis) {
 		return Cabana.Share(type);
 	};
 }
+
+
+
+/*
+var event; // The custom event that will be created
+
+if (document.createEvent) {
+  event = document.createEvent("HTMLEvents");
+  event.initEvent("name-of-custom-event", true, true);
+} else {
+  event = document.createEventObject();
+  event.eventType = "name-of-custom-event";
+}
+
+event.eventName = "name-of-custom-event";
+
+if (document.createEvent) {
+  element.dispatchEvent(event);
+} else {
+  element.fireEvent("on" + event.eventType, event);
+}
+*/
