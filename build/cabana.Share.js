@@ -217,6 +217,28 @@ Cabana.Share = function() {
 
 if (!addthis) {
 	var addthis = {};
+} else {
+	var newAddthis = function() {
+		var output = {};
+
+		for (var key in addthis) {
+			var type = typeof addthis[key];
+
+			if (type == "function") {
+				output[key] = function() {
+					return;
+				};
+			} else if (type == object) {
+				output[key] = {};
+			} else {
+				output[key] = null;
+			}
+		}
+
+		return output;
+	};
+
+	addthis = newAddthis();
 }
 if (!addthis_sendto) {
 	var addthis_sendto = function(type) {
@@ -224,19 +246,9 @@ if (!addthis_sendto) {
 	};
 }
 
-
-addthis = {
-	update: function() {
-		return;
-	},
-	init: function() {
-		return;
-	},
-	__noSuchMethod__: function() {
-		return;
-	}
+addthis.init = addthis.update = function() {
+	return;
 };
-
 
 
 /*
