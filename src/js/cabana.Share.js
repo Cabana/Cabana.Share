@@ -234,6 +234,9 @@ addthis = {
 	},
 	addEventListener: function() {
 		return;
+	},
+	ready: function() {
+		return;
 	}
 };
 
