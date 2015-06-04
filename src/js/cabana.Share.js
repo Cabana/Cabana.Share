@@ -235,7 +235,7 @@ if (!addthis) {
 			}
 
 			for (var nextKey in addthis[key]) {
-				var nextType = typeof addthis[key][keyNext];
+				var nextType = typeof addthis[key][nextKey];
 				if (nextType == "function") {
 					output[key][nextKey] = function() {
 						return;
