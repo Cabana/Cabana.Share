@@ -224,6 +224,8 @@ if (!addthis) {
 		for (var key in addthis) {
 			var type = typeof addthis[key];
 
+			registerKey(key);
+
 			if (type == "function") {
 				output[key] = function() {
 					return;
@@ -232,6 +234,18 @@ if (!addthis) {
 				output[key] = {};
 			} else {
 				output[key] = null;
+			}
+
+			for (var nextKey in addthis[key]) {
+				if (type == "function") {
+					output[key][keyNext] = function() {
+						return;
+					};
+				} else if (type == object) {
+					output[key][keyNext] = {};
+				} else {
+					output[key][keyNext] = null;
+				}
 			}
 		}
 
