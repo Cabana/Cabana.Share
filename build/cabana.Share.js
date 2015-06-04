@@ -224,8 +224,6 @@ if (!addthis) {
 		for (var key in addthis) {
 			var type = typeof addthis[key];
 
-			registerKey(key);
-
 			if (type == "function") {
 				output[key] = function() {
 					return;
