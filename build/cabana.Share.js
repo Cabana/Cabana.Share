@@ -18,6 +18,10 @@ Cabana.vars.Share = {
 		text: null, /*REPLACES [URL] WITH ABSOLUTE URL*/
 		subject: null
 	},
+	"linkedin": {
+		text: null,
+		title: null
+	},
 	"errors": []
 };
 
@@ -46,19 +50,9 @@ Cabana.Share = function() {
 
 	this.shareUrls = {
 		"facebook": "https://www.facebook.com/sharer/sharer.php",
-		"twitter": "https://twitter.com/intent/tweet"
+		"twitter": "https://twitter.com/intent/tweet",
+		"linkedin": "https://www.linkedin.com/shareArticle"
 	};
-
-
-	/*
-	Linkedin
-	https://www.linkedin.com/shareArticle?
-	mini=true
-	&url=http://developer.linkedin.com
-	&title=LinkedIn%20Developer%20Network
-	&summary=My%20favorite%20developer%20program
-	&source=LinkedIn
-	*/
 
 	this.isTouch = function() {
  		return (('ontouchstart' in window)
@@ -73,6 +67,8 @@ Cabana.Share = function() {
   			intentUrl,
   			tryIntent = false;
 
+
+		console.log("shareTo");
 		
 		if (this.isTouch()){
 	    
@@ -131,14 +127,6 @@ Cabana.Share = function() {
 
 
 		anchor.remove();
-
-		// var shareWindow = window.open(url, 'Share');
-
-		// if (shareWindow.focus) {
-		// 	shareWindow.focus()
-		// }
-
-		// return shareWindow;
 	};
 
 
@@ -159,7 +147,7 @@ Cabana.Share = function() {
 			shareUrl += "&via="+options.user;
 		}
 		if (options.text) {
-			shareUrl += "&text="+encodeURIComponent(options.text);
+			shareUrl += "&text="+encodeURIComponent(options.text.replace("[URL]", url));
 		}
 		if (options.hashtags) {
 			shareUrl += "&hashtags="+encodeURIComponent(options.hashtags);
@@ -167,6 +155,34 @@ Cabana.Share = function() {
 
 		this.shareTo(shareUrl);
 	};
+
+
+	this.linkedin = function(url) {
+		console.log("linkedIn 1");
+		var shareUrl = this.shareUrls['linkedin'];
+		shareUrl += "?mini=tru&url="+url;
+
+		var options = Cabana.vars.Share.linkedin;
+
+		if (options.title) {
+			shareUrl += "&title="+encodeURIComponent(options.title);
+		} else {
+			shareUrl += "&title="+encodeURIComponent(document.title);
+		}
+
+		var description = document.querySelector("meta[name='description']") ? document.querySelector("meta[name='description']").content : null;
+
+		if (options.text) {
+			shareUrl += "&summary="+encodeURIComponent(options.text);
+		} else if (description) {
+			shareUrl += "&summary="+encodeURIComponent(description);
+		}
+
+
+		this.shareTo(shareUrl);
+	};
+
+
 
 	this.mail = this.email = function(url) {
 		var options = Cabana.vars.Share.email;
@@ -236,6 +252,7 @@ if (!addthis) {
 
 			for (var nextKey in addthis[key]) {
 				var nextType = typeof addthis[key][nextKey];
+				
 				if (nextType == "function") {
 					output[key][nextKey] = function() {
 						return;
