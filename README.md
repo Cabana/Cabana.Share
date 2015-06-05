@@ -15,11 +15,16 @@ To make sure you always have the latest version use:
 /**
 * Summary of Cabana.Share
 * Share current page to external media
-* @param Url - Url to share - will default to window.location.href
+* @param Url (optional) - Url to share - will default to window.location.href
 * @param Type - Media to share through
 * @return boolean
 */
-Cabana.Share(Url, Type)
+Cabana.Share(Url, Type);
+
+/*
+* Minimal version
+*/
+Cabana.Share(Type);
 ```
 
 Types are:
@@ -28,6 +33,7 @@ Types are:
 - twitter
 - email
 - print
+- linkedin
 
 
 ## Configuration
@@ -46,9 +52,15 @@ window.CabanaShareSettings = {
 	},
 	'email': {
 		text: null,
-		/* Type standard body for email. Every [URL] will be replaced by window.location.href. Defaults to window.location.href */
+		/* Standard body for email. Every [URL] will be replaced by window.location.href. Defaults to window.location.href */
 		subject: null,
 		/* Mail-subject. Defaults to document.title */
+	},
+	'linkedin': {
+		text: null,
+		/* Standard text for sharing. Defaults to meta[name='description'] content-attribute */
+		title: null
+		/* Title for sharing. Defaults to document.title */
 	}
 }
 ```
