@@ -34,6 +34,7 @@ Types are:
 - email
 - print
 - linkedin
+- google
 
 
 ## Configuration

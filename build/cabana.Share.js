@@ -51,7 +51,8 @@ Cabana.Share = function() {
 	this.shareUrls = {
 		"facebook": "https://www.facebook.com/sharer/sharer.php",
 		"twitter": "https://twitter.com/intent/tweet",
-		"linkedin": "https://www.linkedin.com/shareArticle"
+		"linkedin": "https://www.linkedin.com/shareArticle",
+		"google": "https://plus.google.com/share"
 	};
 
 	this.isTouch = function() {
@@ -183,6 +184,17 @@ Cabana.Share = function() {
 	};
 
 
+	this.google = this.googleplus = function(url) {
+
+		var shareUrl = this.shareUrls['google'];
+
+		shareUrl += "?url="+url;
+
+		this.shareTo(shareUrl);
+
+	};
+
+
 
 	this.mail = this.email = function(url) {
 		var options = Cabana.vars.Share.email;
@@ -299,4 +311,9 @@ if (document.createEvent) {
 } else {
   element.fireEvent("on" + event.eventType, event);
 }
+
+
+
+
+https://plus.google.com/share?url={URL}
 */
