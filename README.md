@@ -70,5 +70,30 @@ window.CabanaShareSettings = {
 This module will override AddThis if included.
 It'll override (or create) both `addthis.update()` and `addthis_sendto()`.
 
+##Tracking
+
+###Google Tag Manager
+If Google Tag Manager's dataLayer is found any share-event will be pushed to the object with following parameters:
+```javascript
+dataLayer.push({
+	'event': 'Share.event',
+	/* Fx. Share.facebook if Facebook, Share.twitter if Twitter etc. */
+	'title': document.title,
+	/* The current sites title will be parsed through here */
+	'url': location.href
+	/* Current url is parsed as well */
+})
+```
+
+###Event listeners
+If you are not using Google Tag Manager, you can fetch all the event by listening on the document for 'Share.event'.
+If you want to listen for any Facebook sharing-clicks you could do it as follows:
+```javascript
+document.addEventListener('Share.facebook', function() {
+	/* Custom tracking-actions */
+});
+```
+
+
 ## Status
 This module is still in **alpha** release

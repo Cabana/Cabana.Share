@@ -1,0 +1,19 @@
+
+---- FIRING EVENTS METHOD
+var event;
+
+if (document.createEvent) {
+  event = document.createEvent("HTMLEvents");
+  event.initEvent("name-of-custom-event", true, true);
+} else {
+  event = document.createEventObject();
+  event.eventType = "name-of-custom-event";
+}
+
+event.eventName = "name-of-custom-event";
+
+if (document.createEvent) {
+  element.dispatchEvent(event);
+} else {
+  element.fireEvent("on" + event.eventType, event);
+}
