@@ -101,6 +101,19 @@ Cabana.Share().on('share', function(type) {
 	alert('You shared through', type);
 });
 ```
+Removing a listener:
+```javascript
+Cabana.Share().off('twitter');
+```
+Setting namespaced listener:
+```javascript
+Cabana.Share().on('twitter.myCoolNameSpace', callback);
+```
+Removing a namespaced listener:
+```javascript
+Cabana.Share().off('twitter.myCoolNameSpace');
+```
+
 
 ####Good ol' listeners
 If you are not using Google Tag Manager, you can fetch all the event by listening on the document for 'Share.event'.
