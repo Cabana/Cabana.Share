@@ -66,10 +66,6 @@ window.CabanaShareSettings = {
 }
 ```
 
-## Overrides
-This module will override AddThis if included.
-It'll override (or create) both `addthis.update()` and `addthis_sendto()`.
-
 ##Tracking & listeners
 
 ###Google Tag Manager
@@ -124,6 +120,10 @@ document.addEventListener('Share.facebook', function() {
 });
 ```
 
+## AddThis replacement
+This module is made as an ultra-light and slimmer alternative for AddThis.
+This means that the module can work instead of AddThis or "on top" of AddThis - "on top" meaning that it will override all AddThis listeners and functions, all though AddThis will initially run, before it's overridden.
+This module will override (or create) both `addthis.update()` and `addthis_sendto()`.
 
 ## Status
 This module is still in **alpha** release
