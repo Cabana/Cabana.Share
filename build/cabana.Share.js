@@ -44,6 +44,8 @@ Cabana.vars.Share = {
 
 	'tracking': true,
 
+	'listeners': [],
+
 	'errors': []
 
 };
@@ -178,6 +180,27 @@ Cabana.Share = function() {
 	
 		console.log("tracking");
 	
+		if (Cabana.vars.Share.listeners.length > 0) {
+			[].forEach.call(Cabana.vars.Share.listeners, function(listener, index) {
+				var listenerKey = listener.event.indexOf(".") ? listener.event.split(".")[0] : listener.event;
+	
+				if (listenerKey == "share") {
+					try {
+						listener.callback(type);
+					} catch(e) {
+						console.log("Couldn't fire listener callback on "+listener.event);
+					}
+				} else if (listenerKey == type) {
+					try {
+						listener.callback();
+					} catch(e) {
+						console.log("Couldn't fire listener callback on "+listener.event);
+					}
+				}
+			});
+		}
+	
+	
 		if (!Cabana.vars.Share.tracking) {
 			return;
 		}
@@ -228,6 +251,41 @@ Cabana.Share = function() {
 	
 	
 	};
+
+	if (arguments.length == 0) {
+		var on = function(event, listenerFn) {
+			Cabana.vars.Share.listeners.push({
+				event: event.toLowerCase(),
+				callback: listenerFn
+			});
+		};
+	
+		var off = function(event) {
+		
+			[].forEach.call(Cabana.vars.Share.listeners, function(listener, index) {
+				if (listener.event == event.toLowerCase()) {
+					Cabana.vars.Share.listeners.splice(listener, 1);
+				}
+			});
+		
+		};
+	
+		var listeners = function() {
+			return Cabana.vars.Share.listeners;
+		};
+	
+	
+		return (function() {
+	
+			return {
+				on: on,
+				off: off,
+				listeners: listeners
+			};
+	
+		})();
+	
+	}
 
 
 
@@ -334,7 +392,6 @@ Cabana.Share = function() {
 		};
 		
 		
-
 
 
 

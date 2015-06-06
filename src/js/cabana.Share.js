@@ -28,6 +28,8 @@ Cabana.Share = function() {
 
 	//= include core/fireEvent.js
 
+	//= include core/methods.js
+
 
 
 	//= include share/facebook.js
@@ -41,7 +43,6 @@ Cabana.Share = function() {
 	//= include share/email.js
 	
 	//= include share/print.js
-
 
 
 	var returnState = false;

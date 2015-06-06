@@ -86,6 +86,23 @@ dataLayer.push({
 ```
 
 ###Event listeners
+
+####Built-in
+If you are used to using jQuery event-namespaces, the built-in event listeners will suit you quite well.
+Setting a listener:
+```javascript
+Cabana.Share().on('twitter', function() {
+	alert('My cool callback');
+});
+```
+Setting a global listener:
+```javascript
+Cabana.Share().on('share', function(type) {
+	alert('You shared through', type);
+});
+```
+
+####Good ol' listeners
 If you are not using Google Tag Manager, you can fetch all the event by listening on the document for 'Share.event'.
 If you want to listen for any Facebook sharing-clicks you could do it as follows:
 ```javascript

@@ -20,6 +20,7 @@ Cabana.vars.Share = {
 		title: null
 	},
 	'tracking': true,
+	'listeners': [],
 	'errors': []
 };
 
