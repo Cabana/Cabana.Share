@@ -109,6 +109,10 @@ Removing a namespaced listener:
 ```javascript
 Cabana.Share().off('twitter.myCoolNameSpace');
 ```
+Output all current listeners:
+```javascript
+Cabana.Share().listeners()
+```
 
 
 ####Good ol' listeners
