@@ -98,7 +98,7 @@ Cabana.Share().on('twitter', function() {
 Setting a global listener:
 ```javascript
 Cabana.Share().on('share', function(type) {
-	alert('You shared through', type);
+	alert('You shared through '+type);
 });
 ```
 Removing a listener:
