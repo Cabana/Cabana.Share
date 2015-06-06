@@ -70,7 +70,7 @@ window.CabanaShareSettings = {
 This module will override AddThis if included.
 It'll override (or create) both `addthis.update()` and `addthis_sendto()`.
 
-##Tracking
+##Tracking & listeners
 
 ###Google Tag Manager
 If Google Tag Manager's dataLayer is found any share-event will be pushed to the object with following parameters:
