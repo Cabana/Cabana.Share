@@ -17,6 +17,10 @@
     "leo",
     "orsnes"
   ],
+  "ignore": [
+    "demo.html",
+    "src/"
+  ],
   "license": "MIT",
   "homepage": "https://github.com/cabana/cabana.Share.js"
 }
