@@ -21,8 +21,7 @@
     "demo.html",
     "src/",
     "notes.txt",
-    ".gitignore",
-    "bower.json"
+    ".gitignore"
   ],
   "license": "MIT",
   "homepage": "https://github.com/cabana/cabana.Share.js"
