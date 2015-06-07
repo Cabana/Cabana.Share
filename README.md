@@ -111,7 +111,7 @@ Cabana.Share().off('twitter.myCoolNameSpace');
 ```
 Output all current listeners:
 ```javascript
-Cabana.Share().listeners()
+Cabana.Share().listeners
 ```
 
 

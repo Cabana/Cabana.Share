@@ -1,13 +1,14 @@
 {
   "name": "cabana-share",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "authors": [
     "Leo Ørsnes <loe@cabana.dk>"
   ],
-  "description": "Detect whether your user is left- or right-handed and let your design react to the result.",
+  "description": "Solid, ultralight and configurable sharing. The perfect AddThis alternative",
   "main": "build/cabana.Share.min.js",
   "keywords": [
     "javascript",
+    "cabana",
     "js",
     "share",
     "privacy",

@@ -270,9 +270,9 @@ Cabana.Share = function() {
 		
 		};
 	
-		var listeners = function() {
+		var listeners = (function() {
 			return Cabana.vars.Share.listeners;
-		};
+		})();
 	
 	
 		return (function() {
