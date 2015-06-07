@@ -42,4 +42,5 @@ this.shareTo = function(url, type, newWindow) {
 
 
   this.tracking(type);
+  this.fireListeners();
 };
