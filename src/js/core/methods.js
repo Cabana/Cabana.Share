@@ -6,12 +6,15 @@ if (arguments.length == 0) {
 
 	//= include methods/listeners.js
 
+	//= include methods/addThis.js
+
 	return (function() {
 
 		return {
 			on: on,
 			off: off,
-			listeners: listeners
+			listeners: listeners,
+			addThis: addThis
 		};
 
 	})();

@@ -274,13 +274,53 @@ Cabana.Share = function() {
 			return Cabana.vars.Share.listeners;
 		})();
 	
+		var addThis = function(container) {
+		
+			var links = [];
+		
+			var recursiveFind = function(element) {
+				[].forEach.call(element.children, function(child) {
+					if (child.className.indexOf("addthis_button_") == 0) {
+						links.push(child);
+					} else {
+						recursiveFind(child);
+					}
+				});
+			};
+		
+			recursiveFind(container);
+		
+			links.forEach(function(link) {
+		
+				var functionCall,
+				    classArray = link.className.split(' ');
+		
+				classArray.forEach(function(className) {
+					if (className.indexOf("addthis_button_") > -1) {
+		
+						functionCall = className.replace("addthis_button_", "");
+		
+					}
+				});
+		
+				if (functionCall) {
+					link.onclick = function() {
+						Cabana.Share(functionCall.toLowerCase());
+					};
+				}
+		
+			});
+		
+		};
+	
 	
 		return (function() {
 	
 			return {
 				on: on,
 				off: off,
-				listeners: listeners
+				listeners: listeners,
+				addThis: addThis
 			};
 	
 		})();
@@ -419,7 +459,7 @@ if (!addthis) {
 				output[key] = function() {
 					return;
 				};
-			} else if (type == object) {
+			} else if (type == 'object') {
 				output[key] = {};
 			} else {
 				output[key] = null;
@@ -428,14 +468,19 @@ if (!addthis) {
 			for (var nextKey in addthis[key]) {
 				var nextType = typeof addthis[key][nextKey];
 				
-				if (nextType == 'function') {
-					output[key][nextKey] = function() {
-						return;
-					};
-				} else if (nextType == object) {
-					output[key][nextKey] = {};
-				} else {
-					output[key][nextKey] = null;
+				try {
+					if (nextType == 'function') {
+						output[key][nextKey] = function() {
+							return;
+						};
+					} else if (nextType == 'object') {
+						output[key][nextKey] = {};
+					} else {
+						output[key][nextKey] = null;
+					}
+				} catch(e) {
+					console.log("AddThis overriding had a problem");
+					console.error(e);
 				}
 			}
 		}
@@ -454,3 +499,13 @@ if (!addthis_sendto) {
 addthis.init = addthis.update = function() {
 	return;
 };
+
+/*
+* Override .addthis__button
+*/
+
+[].forEach.call(document.querySelectorAll('.addthis'), function(container, index) {
+
+	Cabana.Share().addThis(container);
+
+});
