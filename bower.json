@@ -22,7 +22,7 @@
     "src/",
     "notes.txt",
     ".gitignore",
-    ".bower.json"
+    "bower.json"
   ],
   "license": "MIT",
   "homepage": "https://github.com/cabana/cabana.Share.js"
