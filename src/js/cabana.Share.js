@@ -8,12 +8,13 @@ Cabana.Share = function() {
 
 	this.type = arguments[arguments.length-1];
 
-	var config = arguments.length > 1 ? arguments[0] : null;
+	var config = arguments.length > 1 ? arguments[0] : null,
+			configOptions;
 
 	if (config) {
 		if (config.url) this.url = config.url;
 
-		if (config.options) this.options = config.options;
+		if (config.options) configOptions = config.options;
 	}
 
 	this.url = this.url ? this.url : window.location.href;
