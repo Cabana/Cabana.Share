@@ -7,7 +7,16 @@
 Cabana.Share = function() {
 
 	this.type = arguments[arguments.length-1];
-	this.url = arguments.length > 1 ? arguments[0] : window.location.href;
+
+	var config = arguments.length > 1 ? arguments[0] : null;
+
+	if (config) {
+		if (config.url) this.url = config.url;
+
+		if (config.options) this.options = config.options;
+	}
+
+	this.url = this.url ? this.url : window.location.href;
 
 
 	this.shareUrls = {

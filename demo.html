@@ -14,6 +14,11 @@
 		<button onClick="Cabana.Share('google')">Google+</button><br />
 		<button onClick="Cabana.Share('print')">Print</button><br />
 
+		<br />
+		<br />
+		<button onClick="ShareWithConfig()">Share to Twitter with parsed options</button>
+		<br />
+		<br />
 
 		<div class="addthis" data-render="facebook,print,email,compact" data-pubid="3Fuser">
 			<div class="addthis_toolbox addthis_default_style ">
@@ -33,5 +38,18 @@
 		</div>
 
 		<script src="build/cabana.Share.js"></script>
+		<script>
+			var ShareWithConfig = function() {
+
+				var config = {
+					'options': {
+						'user': 'leoorsnes'
+					}
+				};
+
+				Cabana.Share(config, 'twitter');
+
+			};
+		</script>
 	</body>
 </html>

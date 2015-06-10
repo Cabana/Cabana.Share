@@ -66,6 +66,20 @@ window.CabanaShareSettings = {
 }
 ```
 
+###On-share configuration
+If you have multiple share actions on one page and want various configurations for those, use the built in on-share configuration.
+Instead of passing a string for URL, you pass an object looking like this:
+```javascript
+var config = {
+	'url': 'http://notMyWindowLocationHref.com',
+	'options': {
+		'user': 'leoorsnes'
+	}
+};
+Cabana.Share(config, 'twitter');
+```
+Here the options object within the config depends on type of sharing as seen above. Fx. you can use 'user' for Twitter but not for linkedin etc.
+
 ##Tracking & listeners
 
 ###Google Tag Manager

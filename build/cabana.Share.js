@@ -87,7 +87,16 @@ if (window.CabanaShareSettings) {
 Cabana.Share = function() {
 
 	this.type = arguments[arguments.length-1];
-	this.url = arguments.length > 1 ? arguments[0] : window.location.href;
+
+	var config = arguments.length > 1 ? arguments[0] : null;
+
+	if (config) {
+		if (config.url) this.url = config.url;
+
+		if (config.options) this.options = config.options;
+	}
+
+	this.url = this.url ? this.url : window.location.href;
 
 
 	this.shareUrls = {
@@ -294,6 +303,19 @@ Cabana.Share = function() {
 		
 		};
 	
+		var extend = function () {
+			var artificial = {};
+		  for (var i=0;i<arguments.length;i++) {
+		    for(var key in arguments[i]) {
+		
+		      if(arguments[i].hasOwnProperty(key)) {
+		        artificial[key] = arguments[i][key];
+		      }
+		    }
+		  }
+		  return artificial;
+		};
+	
 	
 		return (function() {
 	
@@ -301,7 +323,8 @@ Cabana.Share = function() {
 				on: on,
 				off: off,
 				listeners: listeners,
-				addThis: addThis
+				addThis: addThis,
+				extend: extend
 			};
 	
 		})();
@@ -331,7 +354,12 @@ Cabana.Share = function() {
 		var shareUrl = this.shareUrls['twitter'];
 		shareUrl += '?url='+url;
 	
-		var options = Cabana.vars.Share.twitter;
+		console.log("before", Cabana.vars.Share.twitter);
+	
+	
+		var options = Cabana.Share().extend(Cabana.vars.Share.twitter, this.options);
+	
+		console.log("after", Cabana.vars.Share.twitter);
 	
 		if (options.user) {
 			shareUrl += '&via='+options.user;

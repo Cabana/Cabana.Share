@@ -2,7 +2,12 @@ this.twitter = function(url) {
 	var shareUrl = this.shareUrls['twitter'];
 	shareUrl += '?url='+url;
 
-	var options = Cabana.vars.Share.twitter;
+	console.log("before", Cabana.vars.Share.twitter);
+
+
+	var options = Cabana.Share().extend(Cabana.vars.Share.twitter, this.options);
+
+	console.log("after", Cabana.vars.Share.twitter);
 
 	if (options.user) {
 		shareUrl += '&via='+options.user;

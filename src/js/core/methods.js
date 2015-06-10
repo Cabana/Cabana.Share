@@ -8,13 +8,16 @@ if (arguments.length == 0) {
 
 	//= include methods/addThis.js
 
+	//= include methods/extend.js
+
 	return (function() {
 
 		return {
 			on: on,
 			off: off,
 			listeners: listeners,
-			addThis: addThis
+			addThis: addThis,
+			extend: extend
 		};
 
 	})();
