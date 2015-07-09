@@ -170,16 +170,12 @@ Cabana.Share = function() {
 	
 		if (Cabana.vars.Share.popup && newWindow !== false) {
 	
-			console.log("CONSTRUCTING POPUP");
 			
 			var windowWidth = screen.width/2,
 					windowHeight = screen.height/2;
 	
 			var windowTop = (screen.height/2) - (windowHeight/2),
 					windowLeft = (screen.width/2) - (windowWidth/2);
-	
-	
-	        // window.open('http://www.facebook.com/sharer.php?s=100&p[title]=' + title + '&p[summary]=' + descr + '&p[url]=' + url + '&p[images][0]=' + image, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=,height=');
 	
 			window.open(
 					url,
