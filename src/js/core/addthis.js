@@ -44,12 +44,30 @@ if (!addthis) {
 }
 if (!addthis_sendto) {
 	var addthis_sendto = function(type) {
+		var preprocess= addthis.preprocess;
+		if (preprocess && preprocess.url) {
+			console.log("sharing", preprocess.url, type);
+			Cabana.Share({url:preprocess.url}, type);
+			preprocess.url = "";
+			preprocess.type = "";
+			preprocess.action = "";
+			return;
+		}
+
 		return Cabana.Share(type);
 	};
 }
 
-addthis.init = addthis.update = function() {
+addthis.init = function() {
 	return;
+};
+
+addthis.update = function(action, type, url) {
+	addthis.preprocess = {
+		"action": action,
+		"type": type,
+		"url": url
+	};
 };
 
 /*

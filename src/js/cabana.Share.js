@@ -19,6 +19,7 @@ Cabana.Share = function() {
 
 	this.url = this.url ? this.url : window.location.href;
 
+	console.log("config", this.type, config);
 
 	this.shareUrls = {
 		'facebook': 'https://www.facebook.com/sharer/sharer.php',
