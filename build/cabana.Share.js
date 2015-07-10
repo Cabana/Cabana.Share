@@ -522,20 +522,21 @@ if (!addthis) {
 	addthis = newAddthis();
 }
 if (!addthis_sendto) {
-	var addthis_sendto = function(type) {
-		var preprocess= addthis.preprocess;
-		if (preprocess && preprocess.url) {
-			console.log("sharing", preprocess.url, type);
-			Cabana.Share({url:preprocess.url}, type);
-			preprocess.url = "";
-			preprocess.type = "";
-			preprocess.action = "";
-			return;
-		}
-
-		return Cabana.Share(type);
-	};
+	var addthis_sendto;
 }
+addthis_sendto = function(type) {
+	var preprocess= addthis.preprocess;
+	if (preprocess && preprocess.url) {
+		console.log("sharing", preprocess.url, type);
+		Cabana.Share({url:preprocess.url}, type);
+		preprocess.url = "";
+		preprocess.type = "";
+		preprocess.action = "";
+		return;
+	}
+
+	return Cabana.Share(type);
+};
 
 addthis.init = function() {
 	return;
