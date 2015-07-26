@@ -101,7 +101,7 @@ Cabana.Share = function() {
 
 	this.url = this.url ? this.url : window.location.href;
 
-	console.log("config", this.type, config);
+	//console.log("config", this.type, config);
 
 	this.shareUrls = {
 		'facebook': 'https://www.facebook.com/sharer/sharer.php',
@@ -291,17 +291,22 @@ Cabana.Share = function() {
 		
 			var links = [];
 		
-			var recursiveFind = function(element) {
-				[].forEach.call(element.children, function(child) {
-					if (child.className.indexOf("addthis_button_") == 0) {
-						links.push(child);
-					} else {
-						recursiveFind(child);
-					}
-				});
-			};
+			// var recursiveFind = function(element) {
+			// 	[].forEach.call(element.children, function(child) {
+			// 		if (child.className.indexOf("addthis_button_") > -1) {
+			// 			links.push(child);
+			// 		} else {
+			// 			recursiveFind(child);
+			// 		}
+			// 	});
+			// };
 		
-			recursiveFind(container);
+			// recursiveFind(container);
+		
+			if (container.className.indexOf("addthis_button_") > -1) {
+				links.push(container);
+				// console.log("pushing container", container.className);
+			}
 		
 			links.forEach(function(link) {
 		
@@ -317,7 +322,8 @@ Cabana.Share = function() {
 				});
 		
 				if (functionCall) {
-					link.onclick = function() {
+					link.onclick = function(e) {
+						Cabana.vars.Share.trigger = e.target;
 						Cabana.Share(functionCall.toLowerCase());
 					};
 				}
@@ -339,6 +345,94 @@ Cabana.Share = function() {
 		  return artificial;
 		};
 	
+		var config = function(configuration) {
+			if (!configuration) {
+				return;
+			}
+		
+			if (configuration.services_compact) {
+		
+				var services = configuration.services_compact.split(','),
+						shareServices = [],
+						existing = Cabana.Share('log');
+		
+				[].forEach.call(services, function(service, index) {
+					if (service.indexOf('google') > -1) {
+						service = 'google';
+					}
+		
+					if (existing[service]) {
+						shareServices.push(service);
+					}
+				});
+		
+		
+				renderShareBox(shareServices);
+			}
+		};
+	
+		var renderShareBox = function(services) {
+			// console.log("renderShareBox", services);
+		
+			var boxQuery = '.cabana-share-box';
+		
+			var boxTest = document.querySelector(boxQuery);
+		
+			if (boxTest) {
+				boxTest.parentElement.removeChild(boxTest);
+			}
+		
+		
+		
+			var css = '';
+			css += '.cabana-share-box {position:absolute;background-color:#fff;box-shadow:0px 2px 2px rgba(0,0,0,0.2), 0px 2px 6px rgba(0,0,0,0.2);transition:all .3s cubic-bezier(0.2,0,0.4,1);opacity:0;transform-origin:top left;transform:scale(0);border-radius:2px;overflow:hidden;}'
+			css += '.cabana-share-box ul{list-style-type:none;display:block;padding:0;margin:0;}';
+			css += '.cabana-share-box ul li{padding:8px 14px;line-height:1.5;display:block;border-bottom:1px solid #f0f0f0;transition:all .3s cubic-bezier(0.2,0,0.4,1);cursor:pointer;}.cabana-share-box ul li:last-child{border-bottom:0;}';
+			css += '.cabana-share-box ul li:hover{background-color:#f0f0f0;}';
+		
+		
+		
+		
+			var head = document.head || document.getElementsByTagName('head')[0];
+		
+			var style = document.createElement('style');
+			style.type = 'text/css';
+		
+			if (style.styleSheet) {
+				style.styleSheet.cssText = css;
+			} else {
+				style.appendChild(document.createTextNode(css));
+			}
+		
+			head.appendChild(style);
+		
+			var box = document.createElement('div');
+			box.className = boxQuery.replace('.', '');
+		
+			document.body.appendChild(box);
+		
+			var list = document.createElement('ul');
+		
+			box.appendChild(list);
+		
+		
+			[].forEach.call(services, function(service, index) {
+				var listElement = document.createElement('li');
+		
+				var firstLetter = service.slice(0,1).toUpperCase();
+		
+				var serviceName = firstLetter+service.slice(1,service.length);
+		
+				listElement.innerHTML = serviceName;
+				listElement.onclick = function() {
+					Cabana.Share(service)
+				};
+		
+				list.appendChild(listElement);
+			});
+		
+		};
+	
 	
 		return (function() {
 	
@@ -347,30 +441,19 @@ Cabana.Share = function() {
 				off: off,
 				listeners: listeners,
 				addThis: addThis,
-				extend: extend
+				extend: extend,
+				config: config
 			};
 	
 		})();
 	
 	}
 
-
-
 	this.facebook = function(url) {
-
-
 		var shareUrl = this.shareUrls['facebook'];
-
-
 		shareUrl += '?u='+url;
-
-
 	
-
-
 		this.shareTo(shareUrl, 'facebook');
-
-
 	};
 
 	this.twitter = function(url) {
@@ -453,18 +536,56 @@ Cabana.Share = function() {
 	  	this.shareTo(shareUrl, 'email', false);
 	};
 
-		this.print = function() {
-			try {
-				print();
-				this.tracking('print');
-			} catch(e) {
-				console.error(e);
-			}
-		};
+	this.print = function() {
+		try {
+			print();
+			this.tracking('print');
+		} catch(e) {
+			console.error(e);
+		}
+	};
+	
+	
+
+	this.compact = function() {
 		
-		
+		var cabanaBox = document.querySelector('.cabana-share-box'),
+				trigger = Cabana.vars.Share.trigger ? Cabana.vars.Share.trigger : false;
+	
+		if (trigger) {
+	
+			var bodyOffset = document.body.getBoundingClientRect(),
+					triggerOffset = trigger.getBoundingClientRect();
+	
+			// console.log(bodyOffset, triggerOffset);
+	
+			var offsetTop = (triggerOffset.top - bodyOffset.top) + triggerOffset.height,
+					offsetLeft = (triggerOffset.left - bodyOffset.left) + triggerOffset.width;
+	
+			cabanaBox.style.left = offsetLeft+'px';
+			cabanaBox.style.top = offsetTop+'px';
+			cabanaBox.style.opacity = '1';
+			cabanaBox.style.transform = 'scale(1)';
+	
+			cabanaBox.onmouseenter = function() {
+				console.log("entered");
+	
+				cabanaBox.onmouseleave = function() {
+					cabanaBox.onmouseenter = function() {void(0)};
+					cabanaBox.onmouseleave = function() {void(0)};
+					
+					cabanaBox.style.opacity = '0';
+					cabanaBox.style.transform = 'scale(0)';
+				};
+			};
+		}
+	
+	};
 
 
+	if (this.type == "log") {
+		return this;
+	}
 
 	var returnState = false;
 	try {
@@ -527,7 +648,7 @@ if (!addthis_sendto) {
 addthis_sendto = function(type) {
 	var preprocess= addthis.preprocess;
 	if (preprocess && preprocess.url) {
-		console.log("sharing", preprocess.url, type);
+		// console.log("sharing", preprocess.url, type);
 		Cabana.Share({url:preprocess.url}, type);
 		preprocess.url = "";
 		preprocess.type = "";
@@ -550,12 +671,24 @@ addthis.update = function(action, type, url) {
 	};
 };
 
-/*
-* Override .addthis__button
-*/
 
-[].forEach.call(document.querySelectorAll('.addthis'), function(container, index) {
 
-	Cabana.Share().addThis(container);
+document.addEventListener("DOMContentLoaded", function() {
+	/*
+	* Override .addthis_button
+	*/
 
+	[].forEach.call(document.querySelectorAll('[class*="addthis"]'), function(container, index) {
+		Cabana.Share().addThis(container);
+	});
+
+	try {
+		if (addthis_config) {
+			Cabana.Share().config(addthis_config);
+		}
+	} catch(e) {
+		void(0);
+	}
 });
+
+

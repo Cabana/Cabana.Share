@@ -19,7 +19,7 @@ Cabana.Share = function() {
 
 	this.url = this.url ? this.url : window.location.href;
 
-	console.log("config", this.type, config);
+	//console.log("config", this.type, config);
 
 	this.shareUrls = {
 		'facebook': 'https://www.facebook.com/sharer/sharer.php',
@@ -30,31 +30,23 @@ Cabana.Share = function() {
 
 
 	//= include core/isTouch.js
-
 	//= include core/shareTo.js
-
 	//= include core/openWindow.js
-
 	//= include core/tracking.js
-
 	//= include core/fireEvent.js
-
 	//= include core/methods.js
 
-
-
 	//= include share/facebook.js
-
 	//= include share/twitter.js
-
 	//= include share/linkedin.js
-
 	//= include share/google.js
-
 	//= include share/email.js
-	
 	//= include share/print.js
+	//= include share/compact.js
 
+	if (this.type == "log") {
+		return this;
+	}
 
 	var returnState = false;
 	try {

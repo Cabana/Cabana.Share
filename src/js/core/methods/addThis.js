@@ -2,17 +2,22 @@ var addThis = function(container) {
 
 	var links = [];
 
-	var recursiveFind = function(element) {
-		[].forEach.call(element.children, function(child) {
-			if (child.className.indexOf("addthis_button_") == 0) {
-				links.push(child);
-			} else {
-				recursiveFind(child);
-			}
-		});
-	};
+	// var recursiveFind = function(element) {
+	// 	[].forEach.call(element.children, function(child) {
+	// 		if (child.className.indexOf("addthis_button_") > -1) {
+	// 			links.push(child);
+	// 		} else {
+	// 			recursiveFind(child);
+	// 		}
+	// 	});
+	// };
 
-	recursiveFind(container);
+	// recursiveFind(container);
+
+	if (container.className.indexOf("addthis_button_") > -1) {
+		links.push(container);
+		// console.log("pushing container", container.className);
+	}
 
 	links.forEach(function(link) {
 
@@ -28,7 +33,8 @@ var addThis = function(container) {
 		});
 
 		if (functionCall) {
-			link.onclick = function() {
+			link.onclick = function(e) {
+				Cabana.vars.Share.trigger = e.target;
 				Cabana.Share(functionCall.toLowerCase());
 			};
 		}

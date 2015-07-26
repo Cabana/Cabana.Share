@@ -5,6 +5,16 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<style>
+		* {
+			box-sizing : border-box;
+		}
+		html, body {
+			width : 100%;
+			height : 100%;
+			position : relative;
+		}
+		</style>
 	</head>
 	<body>
 		<button onClick="Cabana.Share('twitter')">Twitter</button><br />
@@ -20,7 +30,7 @@
 		<br />
 		<br />
 
-		<div class="addthis" data-render="facebook,print,email,compact" data-pubid="3Fuser">
+		<div class="addthis">
 			<div class="addthis_toolbox addthis_default_style ">
 				<a class="addthis_button_facebook at300b" title="Facebook" href="#">
 					facebook
@@ -36,9 +46,26 @@
 				</a>
 			</div>
 		</div>
+	
+		<div class="cabana-share-box"></div>
+
+		<div class="addthis_button_compact share" style="display:inline-block;">
+			Del
+		</div>
 
 		<script src="build/cabana.Share.js"></script>
 		<script>
+
+	    var addthis_config = {
+        ui_header_color: "#ffffff",
+        ui_header_background: "#004d83",
+        ui_language: "da",
+        ui_click: true,
+        data_use_cookies: false,
+        services_compact: 'email,facebook,twitter,google_plusone_share,pinterest'
+	    }
+
+
 			var ShareWithConfig = function() {
 
 				var config = {

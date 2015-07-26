@@ -48,7 +48,7 @@ if (!addthis_sendto) {
 addthis_sendto = function(type) {
 	var preprocess= addthis.preprocess;
 	if (preprocess && preprocess.url) {
-		console.log("sharing", preprocess.url, type);
+		// console.log("sharing", preprocess.url, type);
 		Cabana.Share({url:preprocess.url}, type);
 		preprocess.url = "";
 		preprocess.type = "";
@@ -71,12 +71,23 @@ addthis.update = function(action, type, url) {
 	};
 };
 
-/*
-* Override .addthis__button
-*/
 
-[].forEach.call(document.querySelectorAll('.addthis'), function(container, index) {
 
-	Cabana.Share().addThis(container);
+document.addEventListener("DOMContentLoaded", function() {
+	/*
+	* Override .addthis_button
+	*/
 
+	[].forEach.call(document.querySelectorAll('[class*="addthis"]'), function(container, index) {
+		Cabana.Share().addThis(container);
+	});
+
+	try {
+		if (addthis_config) {
+			Cabana.Share().config(addthis_config);
+		}
+	} catch(e) {
+		void(0);
+	}
 });
+
