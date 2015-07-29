@@ -72,22 +72,25 @@ addthis.update = function(action, type, url) {
 };
 
 
+if (document.readyState == 'complete') {
+	Cabana.Share().documentReady();
+} else if (document.addEventListener) {
 
-document.addEventListener("DOMContentLoaded", function() {
-	/*
-	* Override .addthis_button
-	*/
+	document.addEventListener('DOMContentLoaded', function() {
+		/*
+		* Override .addthis_button
+		*/
 
-	[].forEach.call(document.querySelectorAll('[class*="addthis"]'), function(container, index) {
-		Cabana.Share().addThis(container);
-	});
+		Cabana.Share().documentReady();
+	}, false);
 
-	try {
-		if (addthis_config) {
-			Cabana.Share().config(addthis_config);
+} else if (document.attachEvent) {
+	document.attachEvent('onreadystatechange', function() {
+		if (document.readyState == 'complete') {
+			document.detachEvent('onreadystatechange', aguments.callee);
+			Cabana.Share().documentReady();
 		}
-	} catch(e) {
-		void(0);
-	}
-});
+	});
+}
+
 

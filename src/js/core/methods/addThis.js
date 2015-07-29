@@ -39,6 +39,13 @@ var addThis = function(container) {
 			};
 		}
 
+		if (functionCall == 'compact') {
+			link.onmouseover = function(e) {
+				Cabana.vars.Share.trigger = e.target;
+				Cabana.Share(functionCall.toLowerCase());
+			};
+		}
+
 	});
 
 };

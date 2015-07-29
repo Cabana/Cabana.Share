@@ -52,9 +52,10 @@
 		<div class="addthis_button_compact share" style="display:inline-block;">
 			Del
 		</div>
-
-		<script src="build/cabana.Share.js"></script>
 		<script>
+	    window.CabanaShareSettings = {
+	    };
+
 
 	    var addthis_config = {
         ui_header_color: "#ffffff",
@@ -63,8 +64,7 @@
         ui_click: true,
         data_use_cookies: false,
         services_compact: 'email,facebook,twitter,google_plusone_share,pinterest'
-	    }
-
+	    };
 
 			var ShareWithConfig = function() {
 
@@ -78,5 +78,7 @@
 
 			};
 		</script>
+
+		<script src="build/cabana.Share.js"></script>
 	</body>
 </html>

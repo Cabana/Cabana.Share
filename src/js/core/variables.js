@@ -9,15 +9,24 @@ Cabana.vars.Share = {
 	'twitter': {
 		user: null,
 		text: null,
-		hashtags: null
+		hashtags: null,
+		icon: '//cdn.cabana.dk/modules/share/twitter.svg'
 	},
 	'email': {
 		text: null, /*REPLACES [URL] WITH ABSOLUTE URL*/
-		subject: null
+		subject: null,
+		icon: '//cdn.cabana.dk/modules/share/email.svg'
 	},
 	'linkedin': {
 		text: null,
-		title: null
+		title: null,
+		icon: '//cdn.cabana.dk/modules/share/linkedin.svg'
+	},
+	'googleplus': {
+		icon: '//cdn.cabana.dk/modules/share/twitter.svg'
+	},
+	'facebook': {
+		icon: '//cdn.cabana.dk/modules/share/facebook.svg'
 	},
 	'tracking': true,
 	'popup': true,

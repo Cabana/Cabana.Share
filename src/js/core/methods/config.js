@@ -3,7 +3,9 @@ var config = function(configuration) {
 		return;
 	}
 
-	if (configuration.services_compact) {
+	var styleTest = document.querySelector('[data-share-element="style"]');
+
+	if (configuration.services_compact && !styleTest) {
 
 		var services = configuration.services_compact.split(','),
 				shareServices = [],
