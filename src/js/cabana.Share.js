@@ -21,7 +21,7 @@ Cabana.Share = function() {
 
 	//console.log("config", this.type, config);
 
-	this.shareUrls = {
+	var shareUrls = this.shareUrls = {
 		'facebook': 'https://www.facebook.com/sharer/sharer.php',
 		'twitter': 'https://twitter.com/intent/tweet',
 		'linkedin': 'https://www.linkedin.com/shareArticle',

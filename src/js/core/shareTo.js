@@ -17,7 +17,7 @@ this.shareTo = function(url, type, newWindow) {
 
 	  	newWindow = false;
 
-	    console.log(intentUrl);
+	    // console.log(intentUrl);
 
 	    startTime = new Date().getTime();
 
@@ -27,7 +27,7 @@ this.shareTo = function(url, type, newWindow) {
 
 	    elapsedTime = (endTime - startTime);
 
-	    console.log(elapsedTime);
+	    // console.log(elapsedTime);
 	  }
 
     if (elapsedTime === undefined || elapsedTime < 1) {

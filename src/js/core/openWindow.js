@@ -28,7 +28,7 @@ this.openWindow = function(url, newWindow) {
 
 	document.body.appendChild(anchor);
 
-	console.log(anchor);
+	// console.log(anchor);
 
 	if (anchor.onclick) {
 		anchor.onclick();

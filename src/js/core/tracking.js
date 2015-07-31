@@ -1,6 +1,6 @@
 this.tracking = function(type) {
 
-	console.log("tracking");
+	// console.log("tracking");
 
 
 	if (!Cabana.vars.Share.tracking) {

@@ -24,7 +24,7 @@ Cabana.vars.Share = {
 
 		hashtags: null,
 
-		icon: '//cdn.cabana.dk/modules/share/twitter.svg'
+		icon: '//cdn.cabana.dk/modules/share/twitter.png'
 
 	},
 
@@ -34,7 +34,7 @@ Cabana.vars.Share = {
 
 		subject: null,
 
-		icon: '//cdn.cabana.dk/modules/share/email.svg'
+		icon: '//cdn.cabana.dk/modules/share/mail.png'
 
 	},
 
@@ -44,19 +44,19 @@ Cabana.vars.Share = {
 
 		title: null,
 
-		icon: '//cdn.cabana.dk/modules/share/linkedin.svg'
+		icon: '//cdn.cabana.dk/modules/share/linkedin.png'
 
 	},
 
-	'googleplus': {
+	'google': {
 
-		icon: '//cdn.cabana.dk/modules/share/twitter.svg'
+		icon: '//cdn.cabana.dk/modules/share/google.png'
 
 	},
 
 	'facebook': {
 
-		icon: '//cdn.cabana.dk/modules/share/facebook.svg'
+		icon: '//cdn.cabana.dk/modules/share/facebook.png'
 
 	},
 
@@ -121,7 +121,7 @@ Cabana.Share = function() {
 
 	//console.log("config", this.type, config);
 
-	this.shareUrls = {
+	var shareUrls = this.shareUrls = {
 		'facebook': 'https://www.facebook.com/sharer/sharer.php',
 		'twitter': 'https://twitter.com/intent/tweet',
 		'linkedin': 'https://www.linkedin.com/shareArticle',
@@ -157,7 +157,7 @@ Cabana.Share = function() {
 	
 		  	newWindow = false;
 	
-		    console.log(intentUrl);
+		    // console.log(intentUrl);
 	
 		    startTime = new Date().getTime();
 	
@@ -167,7 +167,7 @@ Cabana.Share = function() {
 	
 		    elapsedTime = (endTime - startTime);
 	
-		    console.log(elapsedTime);
+		    // console.log(elapsedTime);
 		  }
 	
 	    if (elapsedTime === undefined || elapsedTime < 1) {
@@ -215,7 +215,7 @@ Cabana.Share = function() {
 	
 		document.body.appendChild(anchor);
 	
-		console.log(anchor);
+		// console.log(anchor);
 	
 		if (anchor.onclick) {
 			anchor.onclick();
@@ -229,7 +229,7 @@ Cabana.Share = function() {
 
 	this.tracking = function(type) {
 	
-		console.log("tracking");
+		// console.log("tracking");
 	
 	
 		if (!Cabana.vars.Share.tracking) {
@@ -262,7 +262,7 @@ Cabana.Share = function() {
 	
 		var eventName = 'Share.'+type;
 	
-		console.log("eventName", eventName);
+		// console.log("eventName", eventName);
 	
 		if (document.createEvent) {
 			e = document.createEvent('Event');
@@ -371,16 +371,21 @@ Cabana.Share = function() {
 		};
 	
 		var config = function(configuration) {
-			if (!configuration) {
-				return;
-			}
 		
 			var styleTest = document.querySelector('[data-share-element="style"]');
 		
-			if (configuration.services_compact && !styleTest) {
+			if (configuration) {
+				var compactUsed = configuration.services_compact ? true : (document.querySelectorAll('.addthis_button_compact').length > 0);
+			} else {
+				var compactUsed = (document.querySelectorAll('.addthis_button_compact').length > 0);
+			}
+		
+		
+			var shareServices = [];
+		
+			if (configuration && configuration.services_compact && !styleTest) {
 		
 				var services = configuration.services_compact.split(','),
-						shareServices = [],
 						existing = Cabana.Share('log');
 		
 				[].forEach.call(services, function(service, index) {
@@ -393,8 +398,13 @@ Cabana.Share = function() {
 					}
 				});
 		
+			}
 		
+		
+			if (shareServices.length > 0) {
 				renderShareBox(shareServices);
+			} else if (compactUsed) {
+				renderShareBox('all');
 			}
 		};
 	
@@ -412,9 +422,10 @@ Cabana.Share = function() {
 		
 		
 			var css = '';
-			css += '.cabana-share-box {position:absolute;background-color:#fff;box-shadow:0px 2px 2px rgba(0,0,0,0.2), 0px 2px 6px rgba(0,0,0,0.2);transition:all .3s cubic-bezier(0.2,0,0.4,1);opacity:0;transform-origin:top left;transform:scale(0);border-radius:2px;overflow:hidden;}'
+			css += '.cabana-share-box {position:absolute;background-color:#fff;box-shadow:rgba(0, 0, 0, 0.117647) 0px 1px 3px, rgba(0, 0, 0, 0.239216) 0px 1px 2px, rgba(0, 0, 0, 0.2) 0px 2px 6px;transition:all .3s cubic-bezier(0.2,0,0.4,1);opacity:0;transform-origin:top left;transform:scale(0);border-radius:1px;overflow:hidden;font-size:12px;color:#222;font-family:"Arial", sans-serif;}'
 			css += '.cabana-share-box ul{list-style-type:none;display:block;padding:0;margin:0;}';
-			css += '.cabana-share-box ul li{padding:8px 10px;line-height:1.5;display:block;border-bottom:1px solid #f0f0f0;transition:all .3s cubic-bezier(0.2,0,0.4,1);cursor:pointer;}.cabana-share-box ul li:last-child{border-bottom:0;}';
+			css += '.cabana-share-box ul li{padding:8px 10px;line-height:1.5;display:block;border-bottom:1px solid #f0f0f0;transition:all .3s cubic-bezier(0.2,0,0.4,1);cursor:pointer;padding-right:30px;}';
+			css += '.cabana-share-box ul li:last-child{border-bottom:0;}';
 			css += '.cabana-share-box ul li:hover{background-color:#f0f0f0;}';
 			css += '.cabana-share-box object, .cabana-share-box img {float:left;width:20px;height:20px;margin-right:10px;}';
 			css += '.cabana-share-box__twitter svg {color-fill:#f00;fill:#f00;}';
@@ -447,7 +458,18 @@ Cabana.Share = function() {
 		
 		
 		
+			if (services == 'all') {
+				var preparedArray = [];
 		
+		
+				preparedArray.push('email');
+		
+				for (var shareService in shareUrls) {
+					preparedArray.push(shareService);
+				}
+		
+				services = preparedArray;
+			}
 		
 		
 			[].forEach.call(services, function(service, index) {
@@ -460,6 +482,10 @@ Cabana.Share = function() {
 				var imageUrl = Cabana.vars.Share[service] ? Cabana.vars.Share[service].icon : false;
 		
 				var htmlContent = '';
+		
+				if (imageUrl) {
+					htmlContent += '<img src="'+imageUrl+'" alt="'+service+'" />';
+				}
 		
 				// if (imageUrl) {
 				// 	if (imageUrl.indexOf(".svg") > 0) {
@@ -485,14 +511,7 @@ Cabana.Share = function() {
 		
 		};
 	
-		var styleSvg = function(element) {
-			
-			var svg = element.getSVGDocument();
-			var icon = svg.querySelector('svg');
-		
-			console.log(icon);
-		};
-	
+		//= include methods/styleSvg.js
 		var documentReady = function() {
 			[].forEach.call(document.querySelectorAll('[class*="addthis"]'), function(container, index) {
 				Cabana.Share().addThis(container);
@@ -502,8 +521,10 @@ Cabana.Share = function() {
 			
 		
 			try {
-				if (addthis_config) {
+				if (window.addthis_config) {
 					Cabana.Share().config(addthis_config);
+				} else {
+					Cabana.Share().config();
 				}
 			} catch(e) {
 				void(0);
@@ -516,14 +537,13 @@ Cabana.Share = function() {
 		return (function() {
 	
 			return {
-				version: '0.3.0',
+				version: '0.4.0',
 				on: on,
 				off: off,
 				listeners: listeners,
 				addThis: addThis,
 				extend: extend,
 				config: config,
-				styleSvg: styleSvg,
 				documentReady: documentReady
 			};
 	
@@ -650,7 +670,6 @@ Cabana.Share = function() {
 			cabanaBox.style.transform = 'scale(1)';
 	
 			cabanaBox.onmouseenter = function() {
-				console.log("entered");
 	
 				cabanaBox.onmouseleave = function() {
 					cabanaBox.onmouseenter = function() {void(0)};

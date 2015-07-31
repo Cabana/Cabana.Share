@@ -4,7 +4,7 @@ this.fireEvent = function(type) {
 
 	var eventName = 'Share.'+type;
 
-	console.log("eventName", eventName);
+	// console.log("eventName", eventName);
 
 	if (document.createEvent) {
 		e = document.createEvent('Event');

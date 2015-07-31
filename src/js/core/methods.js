@@ -13,14 +13,13 @@ if (arguments.length == 0) {
 	return (function() {
 
 		return {
-			version: '0.3.0',
+			version: '0.4.0',
 			on: on,
 			off: off,
 			listeners: listeners,
 			addThis: addThis,
 			extend: extend,
 			config: config,
-			styleSvg: styleSvg,
 			documentReady: documentReady
 		};
 

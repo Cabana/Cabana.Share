@@ -7,8 +7,10 @@ var documentReady = function() {
 	
 
 	try {
-		if (addthis_config) {
+		if (window.addthis_config) {
 			Cabana.Share().config(addthis_config);
+		} else {
+			Cabana.Share().config();
 		}
 	} catch(e) {
 		void(0);

@@ -1,14 +1,19 @@
 var config = function(configuration) {
-	if (!configuration) {
-		return;
-	}
 
 	var styleTest = document.querySelector('[data-share-element="style"]');
 
-	if (configuration.services_compact && !styleTest) {
+	if (configuration) {
+		var compactUsed = configuration.services_compact ? true : (document.querySelectorAll('.addthis_button_compact').length > 0);
+	} else {
+		var compactUsed = (document.querySelectorAll('.addthis_button_compact').length > 0);
+	}
+
+
+	var shareServices = [];
+
+	if (configuration && configuration.services_compact && !styleTest) {
 
 		var services = configuration.services_compact.split(','),
-				shareServices = [],
 				existing = Cabana.Share('log');
 
 		[].forEach.call(services, function(service, index) {
@@ -21,7 +26,12 @@ var config = function(configuration) {
 			}
 		});
 
+	}
 
+
+	if (shareServices.length > 0) {
 		renderShareBox(shareServices);
+	} else if (compactUsed) {
+		renderShareBox('all');
 	}
 };

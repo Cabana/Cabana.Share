@@ -19,7 +19,6 @@ this.compact = function() {
 		cabanaBox.style.transform = 'scale(1)';
 
 		cabanaBox.onmouseenter = function() {
-			console.log("entered");
 
 			cabanaBox.onmouseleave = function() {
 				cabanaBox.onmouseenter = function() {void(0)};
