@@ -12,7 +12,7 @@ var renderShareBox = function(services) {
 
 
 	var css = '';
-	css += '.cabana-share-box {position:absolute;background-color:#fff;box-shadow:rgba(0, 0, 0, 0.117647) 0px 1px 3px, rgba(0, 0, 0, 0.239216) 0px 1px 2px, rgba(0, 0, 0, 0.2) 0px 2px 6px;transition:all .3s cubic-bezier(0.2,0,0.4,1);opacity:0;transform-origin:top left;transform:scale(0);border-radius:1px;overflow:hidden;font-size:12px;color:#222;font-family:"Arial", sans-serif;}'
+	css += '.cabana-share-box {position:absolute;background-color:#fff;box-shadow:rgba(0, 0, 0, 0.117647) 0px 1px 3px, rgba(0, 0, 0, 0.239216) 0px 1px 2px, rgba(0, 0, 0, 0.2) 0px 2px 6px;transition:all .3s cubic-bezier(0.2,0,0.4,1);opacity:0;transform-origin:top left;transform:scale(0);border-radius:1px;overflow:hidden;font-size:12px;color:#222;font-family:"Arial", sans-serif;z-index:2000;}'
 	css += '.cabana-share-box ul{list-style-type:none;display:block;padding:0;margin:0;}';
 	css += '.cabana-share-box ul li{padding:8px 10px;line-height:1.5;display:block;border-bottom:1px solid #f0f0f0;transition:all .3s cubic-bezier(0.2,0,0.4,1);cursor:pointer;padding-right:30px;}';
 	css += '.cabana-share-box ul li:last-child{border-bottom:0;}';
