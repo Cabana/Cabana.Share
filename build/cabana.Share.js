@@ -119,6 +119,13 @@ Cabana.Share = function() {
 
 	this.url = this.url ? this.url : window.location.href;
 
+	if (typeof configOptions == 'undefined' || !configOptions.replaceNonAscii || configOptions.replaceNonAscii == true) {
+		this.url = this.url
+			.replace(/%C3%A6/g, 'ae')
+			.replace(/%C3%B8/g, 'oe')
+			.replace(/%C3%A5/g, 'aa');
+	}
+
 	//console.log("config", this.type, config);
 
 	var shareUrls = this.shareUrls = {
@@ -502,7 +509,8 @@ Cabana.Share = function() {
 		
 				listElement.innerHTML = htmlContent;
 		
-				listElement.onclick = function() {
+				listElement.onclick = function(e) {
+					e.preventDefault();
 					Cabana.Share(service)
 				};
 		
@@ -537,7 +545,7 @@ Cabana.Share = function() {
 		return (function() {
 	
 			return {
-				version: '0.4.0',
+				version: '0.5.0',
 				on: on,
 				off: off,
 				listeners: listeners,
@@ -572,8 +580,11 @@ Cabana.Share = function() {
 			shareUrl += '&via='+options.user;
 		}
 		if (options.text) {
-			shareUrl += '&text='+encodeURIComponent(options.text.replace('[URL]', url));
+			shareUrl += '&text='+encodeURIComponent(options.text.replace(/[URL]/g, url));
+		} else {
+			shareUrl += '&text='+encodeURIComponent(url);
 		}
+		
 		if (options.hashtags) {
 			shareUrl += '&hashtags='+encodeURIComponent(options.hashtags);
 		}
@@ -690,6 +701,7 @@ Cabana.Share = function() {
 
 	var returnState = false;
 	try {
+		console.log('THROWING', this.url);
 		this[this.type.toLowerCase()](this.url);
 		returnState = true;
 	} catch(e) {
