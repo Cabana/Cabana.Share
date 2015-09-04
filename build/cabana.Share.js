@@ -126,6 +126,15 @@ Cabana.Share = function() {
 			.replace(/%C3%A5/g, 'aa');
 	}
 
+	/*
+	Remove ending #
+	*/
+
+	if (this.url.indexOf('#') > 0) {
+		var splittedUrl = this.url.split('#');
+		this.url = splittedUrl[0];
+	}
+
 	//console.log("config", this.type, config);
 
 	var shareUrls = this.shareUrls = {
