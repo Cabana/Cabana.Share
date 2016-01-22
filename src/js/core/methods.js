@@ -13,7 +13,7 @@ if (arguments.length == 0) {
 	return (function() {
 
 		return {
-			version: '0.4.0',
+			version: '0.5.0',
 			on: on,
 			off: off,
 			listeners: listeners,

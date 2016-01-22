@@ -3,7 +3,6 @@
 
 //= include core/variables.js
 
-
 Cabana.Share = function() {
 
 	this.type = arguments[arguments.length-1];
@@ -66,7 +65,6 @@ Cabana.Share = function() {
 
 	var returnState = false;
 	try {
-		console.log('THROWING', this.url);
 		this[this.type.toLowerCase()](this.url);
 		returnState = true;
 	} catch(e) {

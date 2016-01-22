@@ -92,7 +92,8 @@ var renderShareBox = function(services) {
 
 		listElement.innerHTML = htmlContent;
 
-		listElement.onclick = function() {
+		listElement.onclick = function(e) {
+			e.preventDefault();
 			Cabana.Share(service)
 		};
 

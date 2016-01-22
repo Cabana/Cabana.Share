@@ -3,7 +3,6 @@ var documentReady = function() {
 		Cabana.Share().addThis(container);
 	});
 
-
 	
 
 	try {

@@ -103,7 +103,6 @@ if (window.CabanaShareSettings) {
 
 
 
-
 Cabana.Share = function() {
 
 	this.type = arguments[arguments.length-1];
@@ -405,12 +404,16 @@ Cabana.Share = function() {
 						existing = Cabana.Share('log');
 		
 				[].forEach.call(services, function(service, index) {
-					if (service.indexOf('google') > -1) {
-						service = 'google';
+					var s = service.trim();
+		
+					if (s.indexOf('google') > -1) {
+						s = 'google';
+					} else if (s === 'mail') {
+						s = 'email';
 					}
 		
-					if (existing[service]) {
-						shareServices.push(service);
+					if (existing[s]) {
+						shareServices.push(s);
 					}
 				});
 		
@@ -533,7 +536,6 @@ Cabana.Share = function() {
 			[].forEach.call(document.querySelectorAll('[class*="addthis"]'), function(container, index) {
 				Cabana.Share().addThis(container);
 			});
-		
 		
 			
 		
@@ -710,7 +712,6 @@ Cabana.Share = function() {
 
 	var returnState = false;
 	try {
-		console.log('THROWING', this.url);
 		this[this.type.toLowerCase()](this.url);
 		returnState = true;
 	} catch(e) {

@@ -12,8 +12,11 @@ this.twitter = function(url) {
 		shareUrl += '&via='+options.user;
 	}
 	if (options.text) {
-		shareUrl += '&text='+encodeURIComponent(options.text.replace('[URL]', url));
+		shareUrl += '&text='+encodeURIComponent(options.text.replace(/[URL]/g, url));
+	} else {
+		shareUrl += '&text='+encodeURIComponent(url);
 	}
+	
 	if (options.hashtags) {
 		shareUrl += '&hashtags='+encodeURIComponent(options.hashtags);
 	}

@@ -17,12 +17,16 @@ var config = function(configuration) {
 				existing = Cabana.Share('log');
 
 		[].forEach.call(services, function(service, index) {
-			if (service.indexOf('google') > -1) {
-				service = 'google';
+			var s = service.trim();
+
+			if (s.indexOf('google') > -1) {
+				s = 'google';
+			} else if (s === 'mail') {
+				s = 'email';
 			}
 
-			if (existing[service]) {
-				shareServices.push(service);
+			if (existing[s]) {
+				shareServices.push(s);
 			}
 		});
 
