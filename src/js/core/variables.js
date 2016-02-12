@@ -1,5 +1,5 @@
-if (!Cabana) {
-	var Cabana = {};
+if (!window.Cabana) {
+	window.Cabana = {};
 }
 if (!Cabana.vars) {
 	Cabana.vars = {};
