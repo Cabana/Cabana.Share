@@ -45,3 +45,4 @@ gulp.task("build:min", function() {
 gulp.task('watch', ['clean', 'build'], function () {
     gulp.watch(watchDir, ['build']);
 });
+
