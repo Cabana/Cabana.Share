@@ -357,6 +357,7 @@
 			
 					if (functionCall) {
 						link.onclick = function(e) {
+							e.preventDefault();
 							Cabana.vars.Share.trigger = e.target;
 							Cabana.Share(functionCall.toLowerCase());
 						};
@@ -557,7 +558,7 @@
 			return (function() {
 		
 				return {
-					version: '0.5.1',
+					version: '0.5.2',
 					on: on,
 					off: off,
 					listeners: listeners,
@@ -718,8 +719,6 @@
 		} catch(e) {
 			Cabana.vars.Share.errors.push(e);
 			returnState = false;
-		} finally {
-			return returnState;
 		}
 	};
 	if (!addthis) {

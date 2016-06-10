@@ -71,8 +71,6 @@
 		} catch(e) {
 			Cabana.vars.Share.errors.push(e);
 			returnState = false;
-		} finally {
-			return returnState;
 		}
 	};
 

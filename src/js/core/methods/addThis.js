@@ -34,6 +34,7 @@ var addThis = function(container) {
 
 		if (functionCall) {
 			link.onclick = function(e) {
+				e.preventDefault();
 				Cabana.vars.Share.trigger = e.target;
 				Cabana.Share(functionCall.toLowerCase());
 			};
