@@ -594,8 +594,6 @@
 			}
 			if (options.text) {
 				shareUrl += '&text='+encodeURIComponent(options.text.replace(/[URL]/g, url));
-			} else {
-				shareUrl += '&text='+encodeURIComponent(url);
 			}
 			
 			if (options.hashtags) {
