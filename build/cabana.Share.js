@@ -1,105 +1,155 @@
 (function(window) {
-	'use strict';
+	'use strict';
 
 	if (!window.Cabana) {
 
+
 		window.Cabana = {};
 
+
 	}
+
 
 	if (!Cabana.vars) {
 
+
 		Cabana.vars = {};
+
 
 	}
 
+
 	
+
 
 	Cabana.vars.Share = {
 
+
 		'twitter': {
+
 
 			user: null,
 
+
 			text: null,
+
 
 			hashtags: null,
 
+
 			icon: '//cdn.cabana.dk/modules/share/twitter.png'
 
+
 		},
+
 
 		'email': {
 
+
 			text: null, /*REPLACES [URL] WITH ABSOLUTE URL*/
+
 
 			subject: null,
 
+
 			icon: '//cdn.cabana.dk/modules/share/mail.png'
 
+
 		},
+
 
 		'linkedin': {
 
+
 			text: null,
+
 
 			title: null,
 
+
 			icon: '//cdn.cabana.dk/modules/share/linkedin.png'
 
+
 		},
+
 
 		'google': {
 
+
 			icon: '//cdn.cabana.dk/modules/share/google.png'
 
+
 		},
+
 
 		'facebook': {
 
+
 			icon: '//cdn.cabana.dk/modules/share/facebook.png'
+
 
 		},
 
+
 		'tracking': true,
+
 
 		'popup': true,
 
+
 		'listeners': [],
+
 
 		'errors': []
 
+
 	};
 
-	
 
 	
+
+
+	
+
 
 	if (window.CabanaShareSettings) {
 
+
 		try {
+
 
 			for (var key in window.CabanaShareSettings) {
 
+
 				for (var object in window.CabanaShareSettings[key]) {
 
+
 	
+
 
 					Cabana.vars.Share[key][object] = window.CabanaShareSettings[key][object];
 
+
 	
+
 
 				}
 
+
 			}
+
 
 		} catch(e) {
 
+
 			console.log('Something went wrong setting up configuration');
+
 
 		}
 
+
 	}
+
 
 	
 
@@ -142,19 +192,22 @@
 			'twitter': 'https://twitter.com/intent/tweet',
 			'linkedin': 'https://www.linkedin.com/shareArticle',
 			'google': 'https://plus.google.com/share'
-		};
+		};
 
 		this.isTouch = function() {
 
+
 				return (('ontouchstart' in window)
+
 
 					|| (navigator.MaxTouchPoints > 0)
 
+
 		    || (navigator.msMaxTouchPoints > 0));
 
-		};
 
-		this.shareTo = function(url, type, newWindow) {
+		};
+		this.shareTo = function(url, type, newWindow) {
 		  var startTime,
 		  		endTime,
 					elapsedTime,
@@ -200,8 +253,7 @@
 		  this.tracking(type);
 		  this.fireListeners();
 		};
-
-		this.openWindow = function(url, newWindow) {
+		this.openWindow = function(url, newWindow) {
 		
 			if (Cabana.vars.Share.popup && newWindow !== false) {
 		
@@ -242,8 +294,7 @@
 		
 			anchor.remove();
 		};
-
-		this.tracking = function(type) {
+		this.tracking = function(type) {
 		
 			// console.log("tracking");
 		
@@ -271,8 +322,7 @@
 			}
 		
 		};
-
-		this.fireEvent = function(type) {
+		this.fireEvent = function(type) {
 			
 			var e;
 		
@@ -298,16 +348,19 @@
 		
 		
 		};
-
-		if (arguments.length == 0) {
+		if (arguments.length == 0) {
 			var on = function(event, listenerFn) {
-				Cabana.vars.Share.listeners.push({
-					event: event.toLowerCase(),
-					callback: listenerFn
-				});
-			};
 		
-			var off = function(event) {
+				Cabana.vars.Share.listeners.push({
+		
+					event: event.toLowerCase(),
+		
+					callback: listenerFn
+		
+				});
+		
+			};
+			var off = function(event) {
 			
 				[].forEach.call(Cabana.vars.Share.listeners, function(listener, index) {
 					if (listener.event == event.toLowerCase()) {
@@ -316,12 +369,10 @@
 				});
 			
 			};
-		
-			var listeners = (function() {
+			var listeners = (function() {
 				return Cabana.vars.Share.listeners;
 			})();
-		
-			var addThis = function(container) {
+			var addThis = function(container) {
 			
 				var links = [];
 			
@@ -373,8 +424,7 @@
 				});
 			
 			};
-		
-			var extend = function () {
+			var extend = function () {
 				var artificial = {};
 			  for (var i=0;i<arguments.length;i++) {
 			    for(var key in arguments[i]) {
@@ -386,8 +436,7 @@
 			  }
 			  return artificial;
 			};
-		
-			var config = function(configuration) {
+			var config = function(configuration) {
 			
 				var styleTest = document.querySelector('[data-share-element="style"]');
 			
@@ -428,8 +477,7 @@
 					renderShareBox('all');
 				}
 			};
-		
-			var renderShareBox = function(services) {
+			var renderShareBox = function(services) {
 				// console.log("renderShareBox", services);
 			
 				var boxQuery = '.cabana-share-box';
@@ -532,9 +580,7 @@
 				});
 			
 			};
-		
-			//= include methods/styleSvg.js
-			var documentReady = function() {
+			var documentReady = function() {
 				[].forEach.call(document.querySelectorAll('[class*="addthis"]'), function(container, index) {
 					Cabana.Share().addThis(container);
 				});
@@ -571,15 +617,19 @@
 			})();
 		
 		}
-
+
 		this.facebook = function(url) {
-			var shareUrl = this.shareUrls['facebook'];
-			shareUrl += '?u='+url;
-		
-			this.shareTo(shareUrl, 'facebook');
-		};
 
-		this.twitter = function(url) {
+			var shareUrl = this.shareUrls['facebook'];
+
+			shareUrl += '?u='+url;
+
+		
+
+			this.shareTo(shareUrl, 'facebook');
+
+		};
+		this.twitter = function(url) {
 			var shareUrl = this.shareUrls['twitter'];
 			shareUrl += '?url='+url;
 		
@@ -594,6 +644,8 @@
 			}
 			if (options.text) {
 				shareUrl += '&text='+encodeURIComponent(options.text.replace(/[URL]/g, url));
+			} else {
+				shareUrl += '&text='+encodeURIComponent(url);
 			}
 			
 			if (options.hashtags) {
@@ -602,8 +654,7 @@
 		
 			this.shareTo(shareUrl, 'twitter');
 		};
-
-		this.linkedin = function(url) {
+		this.linkedin = function(url) {
 			var shareUrl = this.shareUrls['linkedin'];
 			shareUrl += '?mini=tru&url='+url;
 		
@@ -626,8 +677,7 @@
 		
 			this.shareTo(shareUrl, 'linkedin');
 		};
-
-		this.google = this.googleplus = function(url) {
+		this.google = this.googleplus = function(url) {
 		
 			var shareUrl = this.shareUrls['google'];
 		
@@ -636,8 +686,7 @@
 			this.shareTo(shareUrl, 'google');
 		
 		};
-
-		this.mail = this.email = function(url) {
+		this.mail = this.email = function(url) {
 			var options = Cabana.vars.Share.email;
 		
 		  var shareUrl = 'mailto:';
@@ -659,8 +708,7 @@
 		
 		  	this.shareTo(shareUrl, 'email', false);
 		};
-
-		this.print = function() {
+		this.print = function() {
 			try {
 				print();
 				this.tracking('print');
@@ -670,8 +718,7 @@
 		};
 		
 		
-
-		this.compact = function() {
+		this.compact = function() {
 			
 			var cabanaBox = document.querySelector('.cabana-share-box'),
 					trigger = Cabana.vars.Share.trigger ? Cabana.vars.Share.trigger : false;
@@ -718,103 +765,199 @@
 			Cabana.vars.Share.errors.push(e);
 			returnState = false;
 		}
-	};
+	};
 	if (!addthis) {
+
 		var addthis = {};
+
 	} else {
+
 		var newAddthis = function() {
+
 			var output = {};
+
 	
+
 			for (var key in addthis) {
+
 				var type = typeof addthis[key];
+
 	
+
 				if (type == 'function') {
+
 					output[key] = function() {
+
 						return;
+
 					};
+
 				} else if (type == 'object') {
+
 					output[key] = {};
+
 				} else {
+
 					output[key] = null;
+
 				}
+
 	
+
 				for (var nextKey in addthis[key]) {
+
 					var nextType = typeof addthis[key][nextKey];
+
 					
+
 					try {
+
 						if (nextType == 'function') {
+
 							output[key][nextKey] = function() {
+
 								return;
+
 							};
+
 						} else if (nextType == 'object') {
+
 							output[key][nextKey] = {};
+
 						} else {
+
 							output[key][nextKey] = null;
+
 						}
+
 					} catch(e) {
+
 						console.log("AddThis overriding had a problem");
+
 						console.error(e);
+
 					}
+
 				}
+
 			}
+
 	
+
 			return output;
+
 		};
+
 	
+
 		addthis = newAddthis();
+
 	}
+
 	if (!addthis_sendto) {
+
 		var addthis_sendto;
+
 	}
+
 	addthis_sendto = function(type) {
+
 		var preprocess= addthis.preprocess;
+
 		if (preprocess && preprocess.url) {
+
 			// console.log("sharing", preprocess.url, type);
+
 			Cabana.Share({url:preprocess.url}, type);
+
 			preprocess.url = "";
+
 			preprocess.type = "";
+
 			preprocess.action = "";
+
 			return;
+
 		}
+
 	
+
 		return Cabana.Share(type);
+
 	};
+
 	
+
 	addthis.init = function() {
+
 		return;
+
 	};
+
 	
+
 	addthis.update = function(action, type, url) {
+
 		addthis.preprocess = {
+
 			"action": action,
+
 			"type": type,
+
 			"url": url
+
 		};
+
 	};
+
 	
+
 	
+
 	if (document.readyState == 'complete') {
+
 		Cabana.Share().documentReady();
+
 	} else if (document.addEventListener) {
+
 	
+
 		document.addEventListener('DOMContentLoaded', function() {
+
 			/*
+
 			* Override .addthis_button
+
 			*/
+
 	
+
 			Cabana.Share().documentReady();
+
 		}, false);
+
 	
+
 	} else if (document.attachEvent) {
+
 		document.attachEvent('onreadystatechange', function() {
+
 			if (document.readyState == 'complete') {
+
 				document.detachEvent('onreadystatechange', aguments.callee);
+
 				Cabana.Share().documentReady();
+
 			}
+
 		});
+
 	}
+
 	
+
 	
+
 	
 
 })(window);

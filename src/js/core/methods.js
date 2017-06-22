@@ -7,7 +7,6 @@ if (arguments.length == 0) {
 	//= include methods/extend.js
 	//= include methods/config.js
 	//= include methods/renderShareBox.js
-	//= include methods/styleSvg.js
 	//= include methods/documentReady.js
 
 	return (function() {
